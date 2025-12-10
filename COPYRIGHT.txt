@@ -1,0 +1,266 @@
+COPYRIGHT NOTICE
+
+HtmlToPdfCore - HTML to PDF Conversion Library
+Copyright (c) 2025 Royce Lark Corporations. All rights reserved.
+
+═══════════════════════════════════════════════════════════════════════════════
+  PROPRIETARY AND CONFIDENTIAL
+═══════════════════════════════════════════════════════════════════════════════
+
+This software and associated documentation files (the "Software") are the 
+proprietary and confidential property of Royce Lark Corporations ("Company").
+
+ALL RIGHTS RESERVED.
+
+═══════════════════════════════════════════════════════════════════════════════
+  COPYRIGHT PROTECTION
+═══════════════════════════════════════════════════════════════════════════════
+
+The Software is protected by:
+- United States Copyright Law (Title 17, U.S. Code)
+- International Copyright Treaties
+- Trade Secret Laws
+- Patent Laws
+- Other applicable laws and treaties
+
+═══════════════════════════════════════════════════════════════════════════════
+  UNAUTHORIZED USE PROHIBITED
+═══════════════════════════════════════════════════════════════════════════════
+
+WITHOUT A VALID LICENSE, YOU ARE EXPRESSLY PROHIBITED FROM:
+
+1. USING the Software in any production environment
+2. COPYING any part of the Software or documentation
+3. MODIFYING the Software or creating derivative works
+4. DECOMPILING, reverse engineering, or disassembling the Software
+5. REMOVING OR ALTERING any copyright, trademark, or proprietary notices
+6. DISTRIBUTING, sublicensing, or transferring the Software
+7. RENTING, leasing, or lending the Software
+8. CIRCUMVENTING any license validation or security measures
+9. USING the Software beyond the scope of your license
+10. SHARING license keys with unauthorized parties
+
+═══════════════════════════════════════════════════════════════════════════════
+  INFRINGEMENT CONSEQUENCES
+═══════════════════════════════════════════════════════════════════════════════
+
+Unauthorized use, reproduction, or distribution of this Software constitutes:
+
+1. COPYRIGHT INFRINGEMENT under 17 U.S.C. § 501
+   - Statutory damages up to $150,000 per infringement
+   - Criminal penalties including imprisonment
+
+2. TRADE SECRET MISAPPROPRIATION
+   - Civil liability for damages
+   - Injunctive relief
+   - Attorney's fees
+
+3. BREACH OF CONTRACT
+   - Immediate license termination
+   - Financial damages
+   - Legal costs
+
+4. COMPUTER FRAUD AND ABUSE ACT VIOLATIONS (18 U.S.C. § 1030)
+   - Criminal penalties
+   - Civil damages
+
+Royce Lark Corporations will prosecute copyright infringement to the fullest 
+extent of the law.
+
+═══════════════════════════════════════════════════════════════════════════════
+  DMCA NOTICE
+═══════════════════════════════════════════════════════════════════════════════
+
+This Software is protected under the Digital Millennium Copyright Act (DMCA).
+Circumvention of any technical protection measures is prohibited and subject
+to criminal and civil penalties.
+
+═══════════════════════════════════════════════════════════════════════════════
+  TRADEMARK NOTICE
+═══════════════════════════════════════════════════════════════════════════════
+
+"HtmlToPdfCore" and the Royce Lark Corporations logo are trademarks or 
+registered trademarks of Royce Lark Corporations. All other trademarks are 
+the property of their respective owners.
+
+Unauthorized use of any trademark is strictly prohibited.
+
+═══════════════════════════════════════════════════════════════════════════════
+  PATENT NOTICE
+═══════════════════════════════════════════════════════════════════════════════
+
+This Software may be covered by one or more pending or issued patents.
+Use of this Software does not grant any patent licenses except as expressly
+provided in a valid commercial license agreement.
+
+═══════════════════════════════════════════════════════════════════════════════
+  CONFIDENTIALITY
+═══════════════════════════════════════════════════════════════════════════════
+
+The Software contains confidential and proprietary information including:
+- Trade secrets
+- Proprietary algorithms
+- Source code
+- Documentation
+- Technical specifications
+
+Recipients must maintain the confidentiality of all such information.
+
+═══════════════════════════════════════════════════════════════════════════════
+  SOURCE CODE RESTRICTIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+The source code of this Software is CONFIDENTIAL and PROPRIETARY.
+
+You are EXPRESSLY PROHIBITED from:
+- Viewing the source code without authorization
+- Extracting algorithms or methods
+- Creating similar or competing software based on this code
+- Using any portion of the code in other projects
+- Sharing code snippets or technical details
+
+═══════════════════════════════════════════════════════════════════════════════
+  LICENSE VALIDATION
+═══════════════════════════════════════════════════════════════════════════════
+
+This Software includes technical protection measures for license validation.
+Tampering with, bypassing, or circumventing these measures is:
+
+1. A violation of your license agreement
+2. A violation of copyright law
+3. A criminal offense under DMCA
+4. Subject to immediate legal action
+
+═══════════════════════════════════════════════════════════════════════════════
+  MONITORING AND COMPLIANCE
+═══════════════════════════════════════════════════════════════════════════════
+
+Royce Lark Corporations reserves the right to:
+- Monitor usage of the Software
+- Audit compliance with license terms
+- Request documentation of authorized use
+- Disable unauthorized installations remotely
+- Take legal action against violators
+
+═══════════════════════════════════════════════════════════════════════════════
+  REPORTING PIRACY
+═══════════════════════════════════════════════════════════════════════════════
+
+To report unauthorized use or piracy:
+
+Email:    web.html123@gmail.com
+Phone:    +91 9008751562
+Website:  https://roycelarkcorp.com/report-piracy
+
+Rewards available for information leading to prosecution of copyright 
+infringement.
+
+═══════════════════════════════════════════════════════════════════════════════
+  LEGAL NOTICES
+═══════════════════════════════════════════════════════════════════════════════
+
+All legal notices, copyright statements, and proprietary legends must remain
+intact in all copies of the Software. Removal or alteration of such notices
+is prohibited.
+
+═══════════════════════════════════════════════════════════════════════════════
+  INTERNATIONAL COMPLIANCE
+═══════════════════════════════════════════════════════════════════════════════
+
+This Software is subject to:
+- Berne Convention for the Protection of Literary and Artistic Works
+- WIPO Copyright Treaty
+- WIPO Performances and Phonograms Treaty
+- Universal Copyright Convention
+- National copyright laws of all countries
+
+═══════════════════════════════════════════════════════════════════════════════
+  EXPORT CONTROL
+═══════════════════════════════════════════════════════════════════════════════
+
+This Software may be subject to U.S. export control laws and regulations.
+Unauthorized export or re-export is prohibited and may result in criminal
+prosecution.
+
+═══════════════════════════════════════════════════════════════════════════════
+  LICENSED USE
+═══════════════════════════════════════════════════════════════════════════════
+
+To obtain a valid license:
+
+Sales:    sales@roycelarkcorp.com
+Phone:    +91 9008751562
+Website:  https://roycelarkcorp.com/htmltopdf
+
+Volume discounts available.
+
+═══════════════════════════════════════════════════════════════════════════════
+  LEGAL JURISDICTION
+═══════════════════════════════════════════════════════════════════════════════
+
+Any disputes arising from unauthorized use shall be subject to the exclusive
+jurisdiction of the courts in [Your Jurisdiction], and shall be governed by
+the laws of [Your Jurisdiction].
+
+═══════════════════════════════════════════════════════════════════════════════
+  DISCLAIMER
+═══════════════════════════════════════════════════════════════════════════════
+
+THE SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+EITHER EXPRESS OR IMPLIED. HOWEVER, ALL COPYRIGHTS AND PROPRIETARY RIGHTS ARE
+FULLY RESERVED AND PROTECTED.
+
+═══════════════════════════════════════════════════════════════════════════════
+  NOTICE TO DEVELOPERS
+═══════════════════════════════════════════════════════════════════════════════
+
+If you are a software developer using this Software:
+
+- You MUST have a valid commercial license
+- You CANNOT redistribute the Software with your applications
+- Your end users MUST obtain their own licenses
+- You are responsible for ensuring compliance
+- Violation will result in immediate license termination and legal action
+
+═══════════════════════════════════════════════════════════════════════════════
+  NOTICE TO END USERS
+═══════════════════════════════════════════════════════════════════════════════
+
+If you are using software that incorporates HtmlToPdfCore:
+
+- Verify the software developer has a valid license
+- Using unlicensed software may expose you to legal liability
+- Report suspected unlicensed use to web.html123@gmail.com
+
+═══════════════════════════════════════════════════════════════════════════════
+  STATUTORY DAMAGES NOTICE
+═══════════════════════════════════════════════════════════════════════════════
+
+Under U.S. Copyright Law (17 U.S.C. § 504):
+
+"The copyright owner may elect to recover, instead of actual damages and 
+profits, statutory damages for all infringements involved in the action, 
+with respect to any one work, for which any one infringer is liable 
+individually, or for which any two or more infringers are liable jointly 
+and severally, in a sum of not less than $750 or more than $30,000 as the 
+court considers just."
+
+"In a case where the copyright owner sustains the burden of proving, and 
+the court finds, that infringement was committed willfully, the court in 
+its discretion may increase the award of statutory damages to a sum of not 
+more than $150,000."
+
+═══════════════════════════════════════════════════════════════════════════════
+
+This copyright notice must be included with all copies of the Software.
+
+Document Version: 1.0
+Last Updated: December 2025
+
+FOR MORE INFORMATION:
+Royce Lark Corporations
+Email: web.html123@gmail.com
+Web:   https://roycelarkcorp.com
+Phone: +91 9008751562
+
+© 2025 Royce Lark Corporations. All rights reserved.

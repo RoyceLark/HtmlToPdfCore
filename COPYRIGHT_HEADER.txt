@@ -1,0 +1,28 @@
+/*
+ * HtmlToPdfCore - HTML to PDF Conversion Library
+ * 
+ * Copyright (c) 2025 Royce Lark Corporations. All rights reserved.
+ * 
+ * PROPRIETARY AND CONFIDENTIAL
+ * 
+ * This software is the confidential and proprietary information of 
+ * Royce Lark Corporations ("Confidential Information"). You shall not 
+ * disclose such Confidential Information and shall use it only in 
+ * accordance with the terms of the license agreement you entered into 
+ * with Royce Lark Corporations.
+ * 
+ * UNAUTHORIZED USE, REPRODUCTION, OR DISTRIBUTION IS STRICTLY PROHIBITED 
+ * AND MAY RESULT IN SEVERE CIVIL AND CRIMINAL PENALTIES.
+ * 
+ * This code is protected by:
+ * - United States Copyright Law (Title 17, U.S. Code)
+ * - International Copyright Treaties
+ * - Trade Secret Laws
+ * 
+ * For licensing information:
+ * Email: web.html123@gmail.com
+ * Phone: +91 9008751562
+ * Web:   https://roycelarkcorp.com/htmltopdf
+ * 
+ * NO WARRANTY. THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
+ */
