@@ -1,5 +1,5 @@
 /*
- * HtmlToPdfCore - HTML to PDF Conversion Library
+ * ML.HtmlToPdf - HTML to PDF Conversion Library
  * 
  * Copyright (c) 2025 Royce Lark Corporations. All rights reserved.
  * 
@@ -22,7 +22,7 @@
  * For licensing information:
  * Email: web.html123@gmail.com
  * Phone: +91 9008751562
- * Web:   https://roycelarkcorp.com/htmltopdf
+ * Web:   https://roycelarkcorp.com/AI.HtmlToPdf
  * 
  * NO WARRANTY. THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
  */

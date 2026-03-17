@@ -2,7 +2,7 @@
 
 ## ⚠️ WARNING: PIRACY DETECTION ENABLED
 
-HtmlToPdfCore includes active anti-piracy measures:
+ML.HtmlToPdf includes active anti-piracy measures:
 
 ### License Validation System
 ✅ Real-time MongoDB validation  
@@ -172,7 +172,7 @@ If you're using unlicensed software:
 
 **Sales**: sales@roycelarkcorp.com  
 **Phone**: +91 9008751562  
-**Web**: https://roycelarkcorp.com/htmltopdf  
+**Web**: https://roycelarkcorp.com/AI.HtmlToPdf  
 
 ---
 

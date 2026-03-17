@@ -1,6 +1,10 @@
-# HtmlToPdfCore (RoyceLark Corporations)
+# ML.HtmlToPdf (RoyceLark Corporations)
 
-A robust, high-performance HTML to PDF rendering library for .NET 9 with AI/ML-powered and Soon .NET 10 with AI/ML-powered optimizations.
+A robust, high-performance HTML to PDF rendering library for **.NET 8, .NET 9, and .NET 10** with AI/ML-powered optimizations.
+
+**Professional HTML to PDF conversion library for .NET**
+
+A robust, high-performance HTML to PDF rendering library with AI/ML-powered optimizations, built on iText 9 and designed as a modern, high-performance solution for .NET applications.
 
 ## Features
 
@@ -32,6 +36,25 @@ A robust, high-performance HTML to PDF rendering library for .NET 9 with AI/ML-p
 - ✅ Memory leak prevention
 - ✅ Content complexity analysis
 
+### IronPDF Parity Features
+- ✅ **Full API Symmetry**: Drop-in replacement for `PdfMlRender` and `MLPdfRenderOptions`.
+- ✅ **True Chromium Rendering**: `PdfMlRender` uses a headless Chromium engine — identical — supporting modern CSS, CSS Grid, WebGL, JS events, and viewport scaling.
+- ✅ **Fluent Builder**: Native fluent API for all rendering settings.
+- ✅ **Static Rendering**: Convenience methods like `PdfMlRender.StaticRenderHtmlAsPdf()`.
+- ✅ **Extended Page Sizes**: A0-A9, B0-B10, Letter, Legal, Ledger, Tabloid, Custom.
+- ✅ **FontScale via CSS zoom**: `FontScale` is injected as `html { zoom: X }`.
+- ✅ **Viewport 1280×1024 default**: Matches  internal Chromium viewport baseline.
+- ✅ **Media Type Emulation**: Always sets `print` or `screen` CSS media type.
+- ✅ **Web Font Loading**: Waits for `document.fonts.ready` before rendering — no cut-off fonts.
+- ✅ **BaseUrl injection**: `<base href>` is injected into `<head>` to resolve local CSS, images, and fonts.
+- ✅ **Custom CSS injection**: `CustomCss` and `CustomCssUrl` injected after page load.
+- ✅ **JavaScript support**: Custom JS evaluated post-load via `Javascript` option.
+- ✅ **HTML Form Conversion**: AcroForms from HTML form elements.
+- ✅ **Advanced Styling**: `DrawDividerLine`, `DividerColor`, `FontScale`, `Zoom`, `Grayscale`.
+- ✅ **Complete Metadata**: `Title`, `Author`, `Subject`, `Keywords` as top-level properties.
+- ✅ **Security/Encryption**: Password protection, copy/print restrictions.
+- ✅ **Watermarks**: Text watermarks with opacity, rotation, position, and color.
+
 ### Performance & Reliability
 - ✅ Object pooling for memory efficiency
 - ✅ Concurrent rendering with semaphore control
@@ -44,86 +67,98 @@ A robust, high-performance HTML to PDF rendering library for .NET 9 with AI/ML-p
 ## Installation
 
 ```bash
-dotnet add package RoyceLark.HtmlToPdfCore
+dotnet add package Pdf.ML
 ```
 
 Or via NuGet Package Manager:
 
 ```
-Install-Package RoyceLark.HtmlToPdfCore
+Install-Package Pdf.ML
 ```
 
-## Quick Start
+## Quick Start - Dual Engine Architecture
 
-### Simple Usage
+`Pdf.ML` features a dual-engine architecture giving you the choice between absolute Chromium parity (via `PuppeteerSharp`) or highly-optimized lightweight rendering (via `iText9`).
 
-```csharp
-using RoyceLark.HtmlToPdfCore;
+### 1. IronPDF Drop-In Replacement (True Chromium Engine)
 
-// Create instance
-var converter = HtmlToPdf.Create();
-
-// Render HTML to PDF
-var html = "<h1>Hello World!</h1><p>This is a PDF document.</p>";
-var pdfBytes = await converter.RenderAsync(html);
-
-// Save to file
-await File.WriteAllBytesAsync("output.pdf", pdfBytes);
-```
-
-### Fluent API
+Use `PdfMlRender` when you want a 1:1 drop-in replacement for IronPDF using a real headless Chromium engine. This guarantees perfect rendering for complex WebGL, JS events, and experimental CSS.
 
 ```csharp
-using RoyceLark.HtmlToPdfCore;
-using RoyceLark.HtmlToPdfCore.Models;
+using HtmlToPdfCore;
+using HtmlToPdfCore.Models;
 
-var converter = HtmlToPdf.Create();
+var renderer = new PdfMlRender();
 
-await converter
-    .FromHtml("<h1>My Document</h1><p>Content here...</p>")
-    .WithPageSize(PageSize.A4)
-    .WithOrientation(PageOrientation.Portrait)
-    .WithMargins(20, 20, 20, 20)
-    .WithMetadata(m =>
-    {
-        m.Title = "My Document";
-        m.Author = "Your Name";
-    })
-    .SaveAsync("output.pdf");
-```
+// Build BaseUrl so local CSS, images, web fonts resolve correctly
+var projectRoot = Directory.GetCurrentDirectory();
+var baseUrl = new Uri(projectRoot + Path.DirectorySeparatorChar).AbsoluteUri;
 
-### With Configuration
-
-```csharp
-var html = "<h1>Configured Document</h1>";
-
-var pdfBytes = await converter.RenderAsync(html, options =>
+var options = new MLPdfRenderOptions
 {
-    options.PageSize = PageSize.Letter;
-    options.Orientation = PageOrientation.Landscape;
-    options.Margins = new PageMargins(15, 15, 15, 15);
-    options.EnableJavaScript = true;
-    options.PrintBackground = true;
-    options.ImageQuality = 90;
-    options.Dpi = 300;
-    
-    // Header with page numbers
-    options.Footer = new HeaderFooterOptions
+    // Page layout
+    PageSize        = PageSize.A4,
+    Orientation     = PageOrientation.Portrait,   // aliases: PaperOrientation
+    Margins         = new PageMargins(20, 20, 20, 20),
+    FitToPaperWidth = true,
+
+    // Styling — exactly matching defaults
+    MediaType       = CssMediaType.Screen,    // CSS @media screen rules apply
+    PrintBackground = true,                   // render background colors & images
+    FontScale       = 0.8f,                   // 80% font scale injected as CSS zoom
+    Dpi             = 96,                     // match default DPI
+    Zoom            = 100,                    // page-level zoom (100 = default)
+
+    // Asset resolution
+    BaseUrl         = baseUrl,               // resolves relative CSS, images, fonts
+
+    // Optional: header/footer
+    HtmlHeader = new HtmlHeaderFooter
     {
-        ShowPageNumbers = true,
-        PageNumberFormat = "Page {page} of {total}",
-        Alignment = TextAlignment.Center
-    };
-    
-    // Metadata
-    options.Metadata = new PdfMetadata
-    {
-        Title = "My Report",
-        Author = "John Doe",
-        Subject = "Monthly Report",
-        Keywords = "report, monthly, analytics"
-    };
-});
+        HtmlFragment   = "<h1 style='font-size:10px'>My Report</h1>",
+        Height         = 15,
+        DrawDividerLine = true
+    },
+
+    // PDF metadata
+    Title  = "My Document",
+    Author = "John Doe",
+};
+
+var pdf = await renderer.RenderHtmlAsPdfAsync("<h1>MLPDF Parity</h1>", options);
+pdf.SaveAs("output.pdf");
+```
+
+**Static Quick-Start**
+```csharp
+using HtmlToPdfCore;
+
+var pdf = PdfMlRender.StaticRenderHtmlAsPdf("<h1>Instant PDF</h1>");
+pdf.SaveAs("instant.pdf");
+```
+
+### 2. High-Performance API (Optimized iText9 Engine)
+
+Use `HtmlToPdf.Create()` when you want maximum server performance, the lowest memory footprint, and AI-powered memory optimizations using the native iText9 engine.
+
+```csharp
+using HtmlToPdfCore;
+using HtmlToPdfCore.Models;
+
+// Uses the highly-optimized native engine
+var pdf = await HtmlToPdf.Create()
+    .FromHtml("<h1>High Performance Document</h1>")
+    .WithPageSize(PageSize.Letter)
+    .AsLandscape()
+    .WithMargins(25) // Standard 1-inch margins
+    .WithZoom(110)
+    .WithFontScale(0.9f)
+    .WithHtmlFooter("<footer>Page {page} of {total}</footer>", height: 10)
+    .WithMetadata(m => m.Title = "Analytics Report")
+    .WithWatermark("CONFIDENTIAL", w => w.Opacity = 0.2f)
+    .GenerateAsync();
+
+pdf.SaveAs("optimized_report.pdf");
 ```
 
 ## Advanced Usage
@@ -131,13 +166,13 @@ var pdfBytes = await converter.RenderAsync(html, options =>
 ### Render from URL
 
 ```csharp
-var pdfBytes = await converter.RenderUrlAsync("https://example.com");
+var pdf = await renderer.RenderUrlAsync("https://example.com");
 ```
 
 ### Render from File
 
 ```csharp
-var pdfBytes = await converter.RenderFileAsync("template.html");
+var pdf = await renderer.RenderFileAsync("template.html");
 ```
 
 ### Custom CSS Injection
@@ -217,7 +252,7 @@ Console.WriteLine(text);
 ### ASP.NET Core Integration
 
 ```csharp
-using RoyceLark.HtmlToPdfCore.Extensions;
+using HtmlToPdfCore.Extensions;
 
 // In Program.cs or Startup.cs
 builder.Services.AddHtmlToPdfCore(options =>
@@ -226,6 +261,10 @@ builder.Services.AddHtmlToPdfCore(options =>
     options.MaxConcurrentRenders = Environment.ProcessorCount;
     options.DefaultRenderTimeout = 30000;
 });
+
+// If you plan to use the True Chromium Engine (PdfMlRender) via DI:
+builder.Services.AddSingleton<PdfMlRender>();
+// Note: PdfMlRender manages its own headless Chromium instances under the hood.
 
 // In your controller or service
 public class ReportController : ControllerBase
@@ -238,10 +277,14 @@ public class ReportController : ControllerBase
     }
     
     [HttpGet("generate")]
-    public async Task<IActionResult> GenerateReport()
+    public async Task<IActionResult> GenerateReport([FromServices] PdfMlRender chromiumRenderer)
     {
+        // Example 1: Using the Chromium Engine for IronPDF drop-in parity
+        var pdf1 = await chromiumRenderer.RenderHtmlAsPdfAsync("<h1>True Chromium PDF</h1>");
+        
+        // Example 2: Using the high-speed iText engine
         var html = "<h1>Monthly Report</h1><p>Content...</p>";
-        var pdf = await _renderer.RenderHtmlToPdfAsync(html);
+        var pdf2 = await _renderer.RenderHtmlToPdfAsync(html);
         
         return File(pdf, "application/pdf", "report.pdf");
     }
@@ -251,7 +294,7 @@ public class ReportController : ControllerBase
 ### Certificate Generation
 
 ```csharp
-using RoyceLark.HtmlToPdfCore.Extensions;
+using HtmlToPdfCore.Extensions;
 
 
 // In your controller or service
@@ -326,7 +369,7 @@ public class ReportController : ControllerBase
 The library includes built-in AI/ML capabilities for performance optimization:
 
 ```csharp
-using RoyceLark.HtmlToPdfCore;
+using HtmlToPdfCore;
 using Microsoft.Extensions.Logging;
 
 var loggerFactory = LoggerFactory.Create(builder => 
@@ -505,17 +548,24 @@ catch (OperationCanceledException)
 
 ## Requirements
 
-- .NET 9.0 soon .Net 10
+### Supported .NET Versions
+
+| Version | Support |
+|---|---|
+| .NET 8 | ✅ Supported |
+| .NET 9 | ✅ Supported |
+| .NET 10 | ✅ Supported |
+
 - Windows, Linux, or macOS
 
 ## Dependencies
 
-- iText7 (9.0.4)
-- iText7.pdfhtml (6.3.0)
-- HtmlAgilityPack (1.11.61)
-- Microsoft.ML (3.0.1)
-- AngleSharp (1.1.2)
-- SixLabors.ImageSharp (3.1.5)
+- iText (9.4.0)
+- iText.pdfhtml (6.3.0)
+- HtmlAgilityPack (1.12.4)
+- Microsoft.ML (5.0.0)
+- AngleSharp (1.4.0)
+- SixLabors.ImageSharp (3.1.12)
 
 ## License
 
@@ -524,16 +574,15 @@ MIT License
 ## Support
 
 For issues, questions, or contributions, please visit:
-https://github.com/roycelark/RoyceLark.HtmlToPdfCore
+https://github.com/roycelark/ML.HtmlToPdf
 
 ## Changelog
 
-### Version 1.0.0
-- Initial release
+### Version 9.0.0
+- Added multi-targeting support for **.NET 8, .NET 9, and .NET 10**
 - Full HTML to PDF rendering
 - AI/ML-powered optimizations
 - Comprehensive PDF manipulation
-- .NET 9 and soon .NET 10 support
 
 ## Contributing
 
@@ -545,3 +594,6 @@ Built with:
 - iText7 for PDF generation
 - Microsoft.ML for AI capabilities
 - AngleSharp for HTML parsing
+
+
+© 2025 Royce Lark Corporations. All rights reserved.

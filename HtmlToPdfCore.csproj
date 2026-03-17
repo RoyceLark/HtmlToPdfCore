@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageId>RoyceLark.HtmlToPdfCore</PackageId>
-		<Version>9.0.1</Version>
+		<PackageId>Pdf.ML</PackageId>
+		<Version>8.0.0</Version>
 		<Authors>Royce Lark Corporations</Authors>
 		<Company>Royce Lark Corporations</Company>
-		<Product>HtmlToPdfCore</Product>
+		<Product>Pdf.ML</Product>
 		<Description>A robust, high-performance HTML to PDF rendering library for .NET with AI/ML-powered optimizations.</Description>
 		<PackageTags>pdf;html;converter;rendering</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -18,29 +18,56 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<Copyright>Copyright (c) 2025 Royce Lark Corporations. All rights reserved.</Copyright>		
+		<Copyright>Copyright (c) 2025 Royce Lark Corporations. All rights reserved.</Copyright>
+		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
-
 	<ItemGroup>
-		<None Include="LICENSE.txt" Pack="true" PackagePath="" />
-		<None Include="COPYRIGHT.txt" Pack="true" PackagePath="" />
-		<None Include="ANTI-PIRACY.md" Pack="true" PackagePath="" />
+	  <Compile Remove="resources\**" />
+	  <EmbeddedResource Remove="resources\**" />
+	  <None Remove="resources\**" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<None Include="Assets\icon.png">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
 		<None Include="README.md" Pack="true" PackagePath="" />
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="itext7" Version="9.4.0" />
-		<PackageReference Include="itext7.pdfhtml" Version="6.3.0" />
-		<PackageReference Include="itext7.bouncy-castle-adapter" Version="9.4.0" />
+		<PackageReference Include="itext.commons" Version="9.4.0" />
+		<PackageReference Include="itext" Version="9.4.0" />
+		<PackageReference Include="itext.pdfhtml" Version="6.3.0" />
+		<PackageReference Include="itext.bouncy-castle-adapter" Version="9.4.0" />
+		<PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2" />
 		<PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.11" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
-		<PackageReference Include="Microsoft.Extensions.ObjectPool" Version="10.0.0" />
-		<PackageReference Include="Microsoft.ML" Version="5.0.0" />
-		<PackageReference Include="MongoDB.Driver" Version="3.5.2" />
-		<PackageReference Include="System.Drawing.Common" Version="10.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.ObjectPool" Version="8.0.0" />
+		<PackageReference Include="Microsoft.ML" Version="3.0.1" />
+		<PackageReference Include="MongoDB.Driver" Version="2.25.0" />
+		<PackageReference Include="PuppeteerSharp" Version="18.0.2" />
+		<PackageReference Include="System.Drawing.Common" Version="8.0.0" />
 		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
-		<PackageReference Include="AngleSharp" Version="1.4.0" />
+		<PackageReference Include="AngleSharp" Version="1.1.2" />
 	</ItemGroup>
-
+	
+	<ItemGroup>
+	  <None Update="Assets\Royce.HtmlToPdf.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+		<None Update="Assets\icon.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	  <!--<None Update="Designer.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Update="Icon2.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>-->
+	</ItemGroup>
+	
 </Project>

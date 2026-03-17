@@ -39,14 +39,14 @@ public class PdfManipulator : IPdfManipulator
             try
             {
                 using var outputStream = new MemoryStream();
-                using var mergedDoc = new PdfDocument(new PdfWriter(outputStream));
+                using var mergedDoc = new iText.Kernel.Pdf.PdfDocument(new PdfWriter(outputStream));
 
                 foreach (var pdfBytes in pdfs)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
                     using var inputStream = new MemoryStream(pdfBytes);
-                    using var sourceDoc = new PdfDocument(new PdfReader(inputStream));
+                    using var sourceDoc = new iText.Kernel.Pdf.PdfDocument(new PdfReader(inputStream));
 
                     var pageCount = sourceDoc.GetNumberOfPages();
                     sourceDoc.CopyPagesTo(1, pageCount, mergedDoc);
@@ -86,7 +86,7 @@ public class PdfManipulator : IPdfManipulator
                 var results = new List<byte[]>();
 
                 using var inputStream = new MemoryStream(pdf);
-                using var sourceDoc = new PdfDocument(new PdfReader(inputStream));
+                using var sourceDoc = new iText.Kernel.Pdf.PdfDocument(new PdfReader(inputStream));
 
                 var totalPages = sourceDoc.GetNumberOfPages();
 
@@ -102,7 +102,7 @@ public class PdfManipulator : IPdfManipulator
                     }
 
                     using var outputStream = new MemoryStream();
-                    using var splitDoc = new PdfDocument(new PdfWriter(outputStream));
+                    using var splitDoc = new iText.Kernel.Pdf.PdfDocument(new PdfWriter(outputStream));
 
                     sourceDoc.CopyPagesTo(pageNumber, pageNumber, splitDoc);
                     splitDoc.Close();
@@ -142,7 +142,7 @@ public class PdfManipulator : IPdfManipulator
                 using var inputStream = new MemoryStream(pdf);
                 using var outputStream = new MemoryStream();
 
-                using var pdfDoc = new PdfDocument(new PdfReader(inputStream), new PdfWriter(outputStream));
+                using var pdfDoc = new iText.Kernel.Pdf.PdfDocument(new PdfReader(inputStream), new PdfWriter(outputStream));
                 var font = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFonts.HELVETICA_BOLD);
 
                 var pageCount = pdfDoc.GetNumberOfPages();
@@ -231,7 +231,7 @@ public class PdfManipulator : IPdfManipulator
                         EncryptionConstants.ALLOW_PRINTING | EncryptionConstants.ALLOW_COPY,
                         EncryptionConstants.ENCRYPTION_AES_256);
 
-                using var pdfDoc = new PdfDocument(
+                using var pdfDoc = new iText.Kernel.Pdf.PdfDocument(
                     new PdfReader(inputStream),
                     new PdfWriter(outputStream, writerProperties));
 
@@ -262,7 +262,7 @@ public class PdfManipulator : IPdfManipulator
             try
             {
                 using var inputStream = new MemoryStream(pdf);
-                using var pdfDoc = new PdfDocument(new PdfReader(inputStream));
+                using var pdfDoc = new iText.Kernel.Pdf.PdfDocument(new PdfReader(inputStream));
 
                 var text = new StringBuilder();
                 var pageCount = pdfDoc.GetNumberOfPages();

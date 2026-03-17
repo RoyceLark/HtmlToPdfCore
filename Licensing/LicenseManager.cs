@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
@@ -12,7 +12,7 @@ namespace HtmlToPdfCore.Licensing;
 public class LicenseManager
 {
     // MongoDB Configuration - Change these to your values
-    private static readonly string MongoConnectionString = "mongodb://localhost:27017";
+    private static readonly string MongoConnectionString = "mongodb+srv://readonly_user:33gD6uR5VDXN5b97@cluster0.rxwxwjy.mongodb.net/";
     private static readonly string MongoDatabaseName = "HtmlToPdfLicenses";
 
     private static LicenseInfo? _cachedLicense;
