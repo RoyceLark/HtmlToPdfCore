@@ -25,6 +25,9 @@
 	  <Compile Remove="resources\**" />
 	  <EmbeddedResource Remove="resources\**" />
 	  <None Remove="resources\**" />
+	  <Compile Remove="HtmlToPdfCore.Tests\**" />
+	  <EmbeddedResource Remove="HtmlToPdfCore.Tests\**" />
+	  <None Remove="HtmlToPdfCore.Tests\**" />
 	</ItemGroup>
 	
 	<ItemGroup>
