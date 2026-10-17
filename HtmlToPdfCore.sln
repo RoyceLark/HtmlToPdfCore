@@ -4,7 +4,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlToPdfCore", "HtmlToPdfCore.csproj", "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlToPdfCore.Tests", "..\HtmlToPdfCore.Tests\HtmlToPdfCore.Tests.csproj", "{2400FF34-9CA7-8FA5-2CB2-69018306E46C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlToPdfCore.Tests", "HtmlToPdfCore.Tests\HtmlToPdfCore.Tests.csproj", "{2400FF34-9CA7-8FA5-2CB2-69018306E46C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfConverter.API", "..\PdfConverter.API\PdfConverter.API.csproj", "{9A96BDDB-ECA5-6CFE-B55A-2AA7AB2DD534}"
 EndProject
