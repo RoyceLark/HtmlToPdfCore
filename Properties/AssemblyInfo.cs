@@ -19,6 +19,13 @@ using System.Runtime.InteropServices;
 
 [assembly: ComVisible(false)]
 
+[assembly: InternalsVisibleTo("HtmlToPdfCore.Tests")]
+
+// Needed so Moq's Castle DynamicProxy can generate proxies for MongoDB driver
+// interfaces (e.g. IAsyncCursor<T>, IFindFluent<T,T>) that are generic over our
+// internal LicenseDocument type.
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+
 [assembly: Guid("12345678-1234-1234-1234-123456789012")]
 
 [assembly: AssemblyVersion("9.0.0.0")]
