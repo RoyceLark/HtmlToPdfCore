@@ -7,7 +7,12 @@ namespace HtmlToPdfCore.Licensing;
 /// <summary>
 /// Direct MongoDB license validator
 /// </summary>
-internal class MongoLicenseValidator
+internal interface ILicenseValidator
+{
+    Task<MongoLicenseValidator.ValidationResult> ValidateAsync(string licenseKey);
+}
+
+internal class MongoLicenseValidator : ILicenseValidator
 {
     private readonly IMongoCollection<LicenseDocument> _licenses;
     private readonly IMongoCollection<ActivationDocument> _activations;
@@ -22,10 +27,31 @@ internal class MongoLicenseValidator
         _activations = database.GetCollection<ActivationDocument>("activations");
     }
 
+    /// <summary>
+    /// Test seam: allows a subclass to run the real ValidateAsync decision
+    /// logic below while substituting the MongoDB lookup. Not used in
+    /// production, where GetInstance/the parameterized constructor are used.
+    /// </summary>
+    protected MongoLicenseValidator()
+    {
+        _licenses = null!;
+        _activations = null!;
+    }
+
     public static MongoLicenseValidator GetInstance(string connectionString, string databaseName)
     {
         _instance ??= new MongoLicenseValidator(connectionString, databaseName);
         return _instance;
+    }
+
+    /// <summary>
+    /// Fetches the license document for the given key. Overridable so tests
+    /// can exercise the real ValidateAsync decision logic (expiry/active
+    /// checks, mapping, exception handling) without a live MongoDB.
+    /// </summary>
+    protected virtual Task<LicenseDocument?> FindLicenseAsync(string licenseKey)
+    {
+        return _licenses.Find(l => l.LicenseKey == licenseKey).FirstOrDefaultAsync();
     }
 
     public async Task<ValidationResult> ValidateAsync(string licenseKey)
@@ -33,7 +59,7 @@ internal class MongoLicenseValidator
         try
         {
             // Find license in MongoDB
-            var license = await _licenses.Find(l => l.LicenseKey == licenseKey).FirstOrDefaultAsync();
+            var license = await FindLicenseAsync(licenseKey);
 
             if (license == null)
             {
