@@ -18,7 +18,7 @@ public class LicenseManager
     private static LicenseInfo? _cachedLicense;
     private static DateTime _lastValidation = DateTime.MinValue;
     private static readonly TimeSpan ValidationCacheTime = TimeSpan.FromHours(24);
-    private static MongoLicenseValidator? _validator;
+    private static ILicenseValidator? _validator;
     private static bool _isInitialized = false;
     private static readonly object _lockObject = new object();
     private static string? _currentLicenseKey;
@@ -44,9 +44,10 @@ public class LicenseManager
 
             // Initialize validator if needed
             _validator ??= MongoLicenseValidator.GetInstance(MongoConnectionString, MongoDatabaseName);
+            var validator = _validator;
 
             // Validate with MongoDB
-            var result = await _validator.ValidateAsync(licenseKey);
+            var result = await validator.ValidateAsync(licenseKey);
 
             if (!result.IsValid && !result.IsOfflineMode)
             {
@@ -313,6 +314,27 @@ public class LicenseManager
     /// Check if license is initialized
     /// </summary>
     public static bool IsInitialized => _isInitialized;
+
+    /// <summary>
+    /// Test seam: inject a fake validator so licensing logic can be unit tested
+    /// without contacting MongoDB. Not for production use.
+    /// </summary>
+    internal static void SetValidatorForTesting(ILicenseValidator validator)
+    {
+        _validator = validator;
+    }
+
+    /// <summary>
+    /// Test seam: reset all cached static state between tests.
+    /// </summary>
+    internal static void ResetForTesting()
+    {
+        _cachedLicense = null;
+        _lastValidation = DateTime.MinValue;
+        _isInitialized = false;
+        _validator = null;
+        _currentLicenseKey = null;
+    }
 }
 
 /// <summary>

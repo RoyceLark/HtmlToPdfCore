@@ -19,6 +19,8 @@ using System.Runtime.InteropServices;
 
 [assembly: ComVisible(false)]
 
+[assembly: InternalsVisibleTo("HtmlToPdfCore.Tests")]
+
 [assembly: Guid("12345678-1234-1234-1234-123456789012")]
 
 [assembly: AssemblyVersion("9.0.0.0")]
