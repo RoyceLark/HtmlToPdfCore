@@ -7,7 +7,12 @@ namespace HtmlToPdfCore.Licensing;
 /// <summary>
 /// Direct MongoDB license validator
 /// </summary>
-internal class MongoLicenseValidator
+internal interface ILicenseValidator
+{
+    Task<MongoLicenseValidator.ValidationResult> ValidateAsync(string licenseKey);
+}
+
+internal class MongoLicenseValidator : ILicenseValidator
 {
     private readonly IMongoCollection<LicenseDocument> _licenses;
     private readonly IMongoCollection<ActivationDocument> _activations;

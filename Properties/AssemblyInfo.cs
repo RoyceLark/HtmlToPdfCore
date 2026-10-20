@@ -30,3 +30,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyMetadata("Website", "https://roycelarkcorp.com/htmltopdf")]
 [assembly: AssemblyMetadata("Support", "support@roycelarkcorp.com")]
 [assembly: AssemblyMetadata("Sales", "web.html123@gmail.com")]
+
+[assembly: InternalsVisibleTo("HtmlToPdfCore.Tests")]
