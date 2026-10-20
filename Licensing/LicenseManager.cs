@@ -18,7 +18,7 @@ public class LicenseManager
     private static LicenseInfo? _cachedLicense;
     private static DateTime _lastValidation = DateTime.MinValue;
     private static readonly TimeSpan ValidationCacheTime = TimeSpan.FromHours(24);
-    private static MongoLicenseValidator? _validator;
+    private static ILicenseValidator? _validator;
     private static bool _isInitialized = false;
     private static readonly object _lockObject = new object();
     private static string? _currentLicenseKey;
@@ -30,6 +30,37 @@ public class LicenseManager
     internal static void SetLogger(ILogger logger)
     {
         _logger = logger;
+    }
+
+    /// <summary>
+    /// Test-only hook: inject a fake validator instead of the real MongoDB-backed one.
+    /// </summary>
+    internal static void SetValidatorForTesting(ILicenseValidator validator)
+    {
+        _validator = validator;
+    }
+
+    /// <summary>
+    /// Test-only hook: reset all cached license state between tests.
+    /// </summary>
+    internal static void ResetForTesting()
+    {
+        _cachedLicense = null;
+        _lastValidation = DateTime.MinValue;
+        _validator = null;
+        _isInitialized = false;
+        _currentLicenseKey = null;
+    }
+
+    /// <summary>
+    /// Test-only hook: seed the cached license state directly, bypassing validation,
+    /// so ValidateLicense() branches (expired/deactivated/valid) can be exercised deterministically.
+    /// </summary>
+    internal static void SeedCachedLicenseForTesting(LicenseInfo info, DateTime lastValidation)
+    {
+        _cachedLicense = info;
+        _lastValidation = lastValidation;
+        _isInitialized = true;
     }
 
     /// <summary>
