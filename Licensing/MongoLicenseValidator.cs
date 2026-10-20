@@ -5,9 +5,18 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace HtmlToPdfCore.Licensing;
 
 /// <summary>
+/// Abstraction over license validation, allowing the real MongoDB-backed validator
+/// to be substituted (e.g. by tests) with a fake implementation.
+/// </summary>
+internal interface ILicenseValidator
+{
+    Task<MongoLicenseValidator.ValidationResult> ValidateAsync(string licenseKey);
+}
+
+/// <summary>
 /// Direct MongoDB license validator
 /// </summary>
-internal class MongoLicenseValidator
+internal class MongoLicenseValidator : ILicenseValidator
 {
     private readonly IMongoCollection<LicenseDocument> _licenses;
     private readonly IMongoCollection<ActivationDocument> _activations;
