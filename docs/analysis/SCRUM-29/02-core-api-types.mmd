@@ -1,0 +1,54 @@
+classDiagram
+ class HtmlToPdf {
+ +MLPdfRenderOptions RenderingOptions
+ +RenderAsync(html, options) Task~PdfDocument~
+ +RenderFileAsync(path, options) Task~PdfDocument~
+ +RenderUrlAsync(url, options) Task~PdfDocument~
+ +MergeAsync(pdfs) Task~PdfDocument~
+ +FromHtml(html) FluentPdfBuilder
+ }
+ class PdfMlRender {
+ +StaticRenderHtmlAsPdf(html, options) PdfDocument
+ }
+ HtmlToPdf <|-- PdfMlRender
+ class FluentPdfBuilder {
+ +WithPageSize(size) FluentPdfBuilder
+ +WithWatermark(text) FluentPdfBuilder
+ +GenerateAsync() Task~PdfDocument~
+ }
+ class PdfDocument {
+ +byte[] BinaryData
+ +int PageCount
+ +SaveAs(path)
+ +ApplyWatermark(text) PdfDocument
+ }
+ class IHtmlToPdfRenderer {
+ <<interface>>
+ +RenderHtmlToPdfAsync(html, options) Task~byte[]~
+ +RenderUrlToPdfAsync(url, options) Task~byte[]~
+ }
+ class HtmlToPdfRenderer
+ class PuppeteerHtmlToPdfRenderer
+ IHtmlToPdfRenderer <|.. HtmlToPdfRenderer
+ IHtmlToPdfRenderer <|.. PuppeteerHtmlToPdfRenderer
+ class IPdfManipulator {
+ <<interface>>
+ +MergePdfsAsync(pdfs) Task~byte[]~
+ +AddWatermarkAsync(pdf, options) Task~byte[]~
+ }
+ class PdfManipulator
+ IPdfManipulator <|.. PdfManipulator
+ class PdfRenderOptions {
+ +PageSize PageSize
+ +PageOrientation Orientation
+ +PageMargins Margins
+ +WatermarkOptions Watermark
+ +SecurityOptions Security
+ }
+ class MLPdfRenderOptions
+ PdfRenderOptions <|-- MLPdfRenderOptions
+ HtmlToPdf --> IHtmlToPdfRenderer
+ HtmlToPdf --> IPdfManipulator
+ HtmlToPdf --> FluentPdfBuilder
+ FluentPdfBuilder --> PdfRenderOptions
+ HtmlToPdf --> PdfDocument

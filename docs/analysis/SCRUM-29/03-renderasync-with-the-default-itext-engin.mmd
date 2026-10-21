@@ -1,0 +1,16 @@
+sequenceDiagram
+ participant App as Consumer
+ participant Facade as HtmlToPdf
+ participant OptSvc as MemoryOptimizer
+ participant Eng as HtmlToPdfRenderer
+ participant iText as iText HtmlConverter
+ App->>Facade: RenderAsync(html, options)
+ Facade->>Eng: RenderHtmlToPdfAsync(html, options)
+ Eng->>Eng: acquire render semaphore
+ Eng->>OptSvc: PredictMemoryUsageAsync(html)
+ OptSvc-->>Eng: MemoryPrediction
+ Eng->>Eng: PreProcessHtmlAsync (AngleSharp)
+ Eng->>iText: ConvertToPdf(html, pdfDoc)
+ iText-->>Eng: PDF bytes in stream
+ Eng-->>Facade: byte[]
+ Facade-->>App: PdfDocument
