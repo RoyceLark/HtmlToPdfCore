@@ -1,0 +1,57 @@
+flowchart LR
+ subgraph consumer[Host Application]
+ app[Consumer Code]
+ end
+ subgraph facade[Public API]
+ HtmlToPdf
+ PdfMlRender
+ FluentPdfBuilder
+ PdfDocument
+ end
+ subgraph di[DI Setup]
+ SCE[ServiceCollectionExtensions]
+ end
+ subgraph render[Rendering Engines]
+ IRenderer["IHtmlToPdfRenderer"]
+ ItextEngine[HtmlToPdfRenderer]
+ PuppeteerEngine[PuppeteerHtmlToPdfRenderer]
+ end
+ subgraph manip[PDF Manipulation]
+ IManip["IPdfManipulator"]
+ Manipulator[PdfManipulator]
+ end
+ subgraph ai[AI Heuristics]
+ IOpt["IMemoryOptimizer"]
+ Optimizer[MemoryOptimizer]
+ end
+ subgraph lic[Licensing]
+ LicMgr[LicenseManager]
+ Validator[MongoLicenseValidator]
+ end
+ subgraph ext[External Systems]
+ iTextLib[iText 9]
+ Chromium[Headless Chromium]
+ Mongo[(MongoDB Atlas)]
+ end
+ app --> HtmlToPdf
+ app --> PdfMlRender
+ app --> SCE
+ SCE --> IRenderer
+ SCE --> IManip
+ SCE --> IOpt
+ HtmlToPdf --> IRenderer
+ HtmlToPdf --> IManip
+ HtmlToPdf --> FluentPdfBuilder
+ HtmlToPdf --> PdfDocument
+ PdfMlRender --> PuppeteerEngine
+ IRenderer --> ItextEngine
+ IRenderer --> PuppeteerEngine
+ IManip --> Manipulator
+ IOpt --> Optimizer
+ ItextEngine --> IOpt
+ ItextEngine --> iTextLib
+ Manipulator --> iTextLib
+ PdfDocument --> iTextLib
+ PuppeteerEngine --> Chromium
+ LicMgr --> Validator
+ Validator --> Mongo

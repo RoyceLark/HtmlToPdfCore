@@ -1,0 +1,15 @@
+sequenceDiagram
+ participant App as Consumer
+ participant Facade as PdfMlRender
+ participant Eng as PuppeteerHtmlToPdfRenderer
+ participant Browser as Headless Chromium
+ App->>Facade: RenderHtmlAsPdfAsync(html, options)
+ Facade->>Eng: RenderHtmlToPdfAsync(html, options)
+ Eng->>Eng: EnsureBrowserDownloadedAsync
+ Eng->>Browser: LaunchAsync + NewPageAsync
+ Eng->>Browser: SetContentAsync or file:// navigate
+ Eng->>Browser: inject CSS, JS, watermark
+ Eng->>Browser: PdfDataAsync(pdfOptions)
+ Browser-->>Eng: PDF bytes
+ Eng-->>Facade: byte[]
+ Facade-->>App: PdfDocument

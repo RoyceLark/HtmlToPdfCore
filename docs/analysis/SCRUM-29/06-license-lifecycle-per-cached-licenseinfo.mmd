@@ -1,0 +1,11 @@
+stateDiagram-v2
+ [*] --> Uninitialized
+ Uninitialized --> Validating : SetLicenseKeyAsync
+ Validating --> Valid : found, active, not expired
+ Validating --> Invalid : not found or Mongo error
+ Valid --> Expired : ExpiryDate passed
+ Valid --> Deactivated : IsActive false
+ Valid --> Valid : revalidated within 24h
+ Expired --> [*]
+ Deactivated --> [*]
+ Invalid --> [*]
