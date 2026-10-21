@@ -1,0 +1,50 @@
+flowchart TD
+  subgraph PublicApi["Public API"]
+    HtmlToPdf
+    PdfMlRender
+    FluentPdfBuilder
+    PdfDocument
+  end
+  subgraph Contracts["Interfaces"]
+    IRenderer["IHtmlToPdfRenderer"]
+    IManip["IPdfManipulator"]
+    IOpt["IMemoryOptimizer"]
+  end
+  subgraph Renderers
+    ItextRenderer["HtmlToPdfRenderer iText"]
+    PuppeteerRenderer["PuppeteerHtmlToPdfRenderer"]
+  end
+  subgraph Services
+    Manipulator["PdfManipulator"]
+  end
+  subgraph AIModule["AI"]
+    Optimizer["MemoryOptimizer"]
+  end
+  subgraph LicensingModule["Licensing"]
+    LicManager["LicenseManager"]
+    MongoValidator["MongoLicenseValidator"]
+  end
+  subgraph DI["Extensions"]
+    SCExt["ServiceCollectionExtensions"]
+  end
+  subgraph External["External systems"]
+    Mongo[("MongoDB Atlas")]
+    Chromium["Headless Chromium"]
+    RemoteUrl["Remote HTTP URL"]
+  end
+  HtmlToPdf --> IRenderer
+  HtmlToPdf --> IManip
+  PdfMlRender --> PuppeteerRenderer
+  FluentPdfBuilder --> HtmlToPdf
+  IRenderer --> ItextRenderer
+  IRenderer --> PuppeteerRenderer
+  IManip --> Manipulator
+  ItextRenderer --> IOpt
+  IOpt --> Optimizer
+  PuppeteerRenderer --> Chromium
+  ItextRenderer --> RemoteUrl
+  SCExt --> IRenderer
+  SCExt --> IManip
+  SCExt --> IOpt
+  LicManager --> MongoValidator
+  MongoValidator --> Mongo

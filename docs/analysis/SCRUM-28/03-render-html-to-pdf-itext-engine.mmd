@@ -1,0 +1,15 @@
+sequenceDiagram
+  participant Dev as Caller
+  participant Api as HtmlToPdf
+  participant Rend as HtmlToPdfRenderer
+  participant MemOpt as MemoryOptimizer
+  participant Itext as iText HtmlConverter
+  Dev->>Api: RenderAsync html, options
+  Api->>Rend: RenderHtmlToPdfAsync html, options
+  Rend->>MemOpt: PredictMemoryUsageAsync html
+  MemOpt-->>Rend: MemoryPrediction
+  Rend->>Rend: PreProcessHtmlAsync inject CSS
+  Rend->>Itext: ConvertToPdf html, pdfDoc
+  Itext-->>Rend: PDF bytes
+  Rend-->>Api: byte array
+  Api-->>Dev: PdfDocument

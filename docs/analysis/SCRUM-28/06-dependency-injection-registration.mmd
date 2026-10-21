@@ -1,0 +1,7 @@
+flowchart LR
+  HostApp["Host application"] --> AddCore["AddHtmlToPdfCore options"]
+  AddCore --> RegRenderer["IHtmlToPdfRenderer to HtmlToPdfRenderer singleton"]
+  AddCore --> RegManip["IPdfManipulator to PdfManipulator singleton"]
+  AddCore -->|if EnableAIOptimization| RegOpt["IMemoryOptimizer to MemoryOptimizer singleton"]
+  HostApp --> AddLicense["AddHtmlToPdfCoreLicense key"]
+  AddLicense --> LicManager["LicenseManager cache"]
