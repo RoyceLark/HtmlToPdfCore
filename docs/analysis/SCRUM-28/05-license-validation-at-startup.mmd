@@ -1,0 +1,14 @@
+sequenceDiagram
+  participant Host as Host app Program.cs
+  participant Cfg as LicenseConfiguration
+  participant Mgr as LicenseManager
+  participant Val as MongoLicenseValidator
+  participant DB as MongoDB Atlas
+  Host->>Cfg: AddHtmlToPdfCoreLicense key
+  Cfg->>Mgr: SetLicenseKey key
+  Mgr->>Val: ValidateAsync key
+  Val->>DB: Find license by key
+  DB-->>Val: LicenseDocument or null
+  Val-->>Mgr: ValidationResult
+  Mgr-->>Cfg: bool isValid plus LicenseInfo
+  Cfg-->>Host: services with cached license

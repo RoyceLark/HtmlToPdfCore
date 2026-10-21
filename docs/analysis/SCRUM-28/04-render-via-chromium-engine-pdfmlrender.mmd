@@ -1,0 +1,14 @@
+sequenceDiagram
+  participant Dev as Caller
+  participant Api as PdfMlRender
+  participant Pupp as PuppeteerHtmlToPdfRenderer
+  participant Browser as Headless Chromium
+  Dev->>Api: RenderHtmlAsPdfAsync html
+  Api->>Pupp: RenderHtmlToPdfAsync html, options
+  Pupp->>Pupp: EnsureBrowserDownloadedAsync
+  Pupp->>Browser: LaunchAsync, NewPageAsync
+  Pupp->>Browser: SetContentAsync or GoToAsync file
+  Pupp->>Browser: ApplyPostLoadOptions watermark JS
+  Browser-->>Pupp: PdfDataAsync bytes
+  Pupp-->>Api: byte array
+  Api-->>Dev: PdfDocument

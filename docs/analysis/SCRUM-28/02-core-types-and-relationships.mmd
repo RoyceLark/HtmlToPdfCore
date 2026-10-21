@@ -1,0 +1,67 @@
+classDiagram
+  class HtmlToPdf {
+    +MLPdfRenderOptions RenderingOptions
+    +RenderAsync(html, options) PdfDocument
+    +RenderFileAsync(path, options) PdfDocument
+    +RenderUrlAsync(url, options) PdfDocument
+    +Dispose()
+  }
+  class PdfMlRender {
+    +StaticRenderHtmlAsPdf(html) PdfDocument
+  }
+  class FluentPdfBuilder {
+    +WithPageSize(size) FluentPdfBuilder
+    +WithWatermark(text) FluentPdfBuilder
+    +GenerateAsync() PdfDocument
+    +SaveAsync(path) PdfDocument
+  }
+  class PdfDocument {
+    +byte[] BinaryData
+    +int PageCount
+    +SaveAs(path)
+    +Merge(docs) PdfDocument
+    +Encrypt(user, owner) PdfDocument
+    +ExtractAllText() string
+  }
+  class IHtmlToPdfRenderer {
+    <<interface>>
+    +RenderHtmlToPdfAsync(html, options) byte[]
+    +RenderUrlToPdfAsync(url, options) byte[]
+  }
+  class HtmlToPdfRenderer {
+    +RenderHtmlToPdfAsync(html, options) byte[]
+  }
+  class PuppeteerHtmlToPdfRenderer {
+    +RenderHtmlToPdfAsync(html, options) byte[]
+  }
+  class IPdfManipulator {
+    <<interface>>
+    +MergePdfsAsync(pdfs) byte[]
+    +AddWatermarkAsync(pdf, options) byte[]
+  }
+  class PdfManipulator
+  class IMemoryOptimizer {
+    <<interface>>
+    +PredictMemoryUsageAsync(html) MemoryPrediction
+  }
+  class MemoryOptimizer
+  class PdfRenderOptions {
+    +PageSize PageSize
+    +PageOrientation Orientation
+    +PageMargins Margins
+    +WatermarkOptions Watermark
+    +SecurityOptions Security
+  }
+  class MLPdfRenderOptions
+  HtmlToPdf --> IHtmlToPdfRenderer
+  HtmlToPdf --> IPdfManipulator
+  HtmlToPdf ..> PdfDocument
+  PdfMlRender --|> HtmlToPdf
+  FluentPdfBuilder --> HtmlToPdf
+  IHtmlToPdfRenderer <|.. HtmlToPdfRenderer
+  IHtmlToPdfRenderer <|.. PuppeteerHtmlToPdfRenderer
+  IPdfManipulator <|.. PdfManipulator
+  IMemoryOptimizer <|.. MemoryOptimizer
+  HtmlToPdfRenderer --> IMemoryOptimizer
+  MLPdfRenderOptions --|> PdfRenderOptions
+  HtmlToPdf --> MLPdfRenderOptions
